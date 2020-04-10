@@ -25,7 +25,7 @@ struct Informations: View {
 
                 VStack (alignment: .leading, spacing: 10){
                 Text("Codes sources disponible").font(.title)
-                 Text("Les codes sources de l’application ont été rendu public à l’adresse https://github.com/princefr")
+                 Text("Les codes sources de l’application ont été rendu public à l’adresse https://github.com/princefr/Confineup_Covid_IOS")
                 }.padding(5)
 
                 Spacer()
