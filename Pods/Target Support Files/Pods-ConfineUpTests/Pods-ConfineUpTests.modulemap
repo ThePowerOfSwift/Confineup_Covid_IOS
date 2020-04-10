@@ -1,0 +1,6 @@
+framework module Pods_ConfineUpTests {
+  umbrella header "Pods-ConfineUpTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
