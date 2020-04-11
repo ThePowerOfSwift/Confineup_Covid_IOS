@@ -61,13 +61,13 @@ struct Profil: View {
 
 
 class UserData: ObservableObject {
-    @Published var first_name: String = UserDefaults.standard.string(forKey: "first_name") ?? "xxxx"
-    @Published var last_name: String = UserDefaults.standard.string(forKey: "last_name") ?? "xxxx"
+    @Published var first_name: String = UserDefaults.standard.string(forKey: "first_name") ?? ""
+    @Published var last_name: String = UserDefaults.standard.string(forKey: "last_name") ?? ""
     @Published var birth_date = UserDefaults.standard.object(forKey: "birth_date") as? Date ?? Date()
-    @Published var birth_place = UserDefaults.standard.string(forKey: "birth_place") ?? "xxxx"
-    @Published var city = UserDefaults.standard.string(forKey: "city") ?? "xxxx"
-    @Published var zip_code = UserDefaults.standard.string(forKey: "zip_code") ?? "xxxx"
-    @Published var adress = UserDefaults.standard.string(forKey: "adress") ?? "xxxx"
+    @Published var birth_place = UserDefaults.standard.string(forKey: "birth_place") ?? ""
+    @Published var city = UserDefaults.standard.string(forKey: "city") ?? ""
+    @Published var zip_code = UserDefaults.standard.string(forKey: "zip_code") ?? ""
+    @Published var adress = UserDefaults.standard.string(forKey: "adress") ?? ""
     
     func save_user_information() {
         UserDefaults.standard.set(self.first_name, forKey: "first_name")

@@ -66,7 +66,7 @@ struct qrcodegenerator: View {
         if self.userdata.first_name.isEmpty || self.userdata.last_name.isEmpty || self.userdata.birth_place.isEmpty || self.userdata.city.isEmpty ||  self.userdata.zip_code.isEmpty || self.userdata.adress.isEmpty || Calendar.current.isDateInToday(self.userdata.birth_date) {
             self.showingAlert = true
             self.alert_text_top = "Profil non complété"
-            self.alert_message = "Veuillez remplir votre profil pour generer un pdf"
+            self.alert_message = "Veuillez remplir votre profil pour generer un pdf, date de naissance comprise"
         }else{
             let str = "Créé le: \(formateDateToString(date: Date())!) a \(formateDateToHourAndMin(date: Date())!); Nom: \(self.userdata.last_name); Prenom: \(self.userdata.first_name); Naissance: \(formateDateToString(date: self.userdata.birth_date) ?? "xxxxx") a \(self.userdata.birth_place); Adresse: \(self.userdata.adress + ", " + self.userdata.zip_code + ", " + self.userdata.city ); Sortie: \(formateDateToString(date: Date())!) a \(formateDateToHourAndMin(date: Date())!); Motifs: \(raisons[selectedRaison])"
                     
