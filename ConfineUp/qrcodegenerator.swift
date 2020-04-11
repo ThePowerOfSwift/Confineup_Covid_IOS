@@ -17,8 +17,11 @@ struct qrcodegenerator: View {
 
     let context = CIContext()
     let filter = CIFilter.qrCodeGenerator()
+    @State private var showingAlert = false
     
     var raisons  = ["Sport", "Travail", "Courses", "Sante", "Famille", "Judiciare", "Missions"]
+    @State var alert_text_top: String = ""
+    @State var alert_message: String = ""
 
     @State private var selectedRaison = 0
 
@@ -51,6 +54,8 @@ struct qrcodegenerator: View {
             .navigationBarItems(trailing:
                 Button("Générer") {
                     self.SaveToCoreData()
+                }.alert(isPresented: $showingAlert) {
+                    Alert(title: Text(alert_text_top), message: Text(alert_message), dismissButton: .default(Text("D'accord")))
                 }
                 
             )
@@ -59,9 +64,9 @@ struct qrcodegenerator: View {
     
     func SaveToCoreData(){
         if self.userdata.first_name.isEmpty || self.userdata.last_name.isEmpty || self.userdata.birth_place.isEmpty || self.userdata.city.isEmpty ||  self.userdata.zip_code.isEmpty || self.userdata.adress.isEmpty || Calendar.current.isDateInToday(self.userdata.birth_date) {
-
-            print("Veuillez remplir vos imformations")
-            
+            self.showingAlert = true
+            self.alert_text_top = "Profil non complété"
+            self.alert_message = "Veuillez remplir votre profil pour generer un pdf"
         }else{
             let str = "Créé le: \(formateDateToString(date: Date())!) a \(formateDateToHourAndMin(date: Date())!); Nom: \(self.userdata.last_name); Prenom: \(self.userdata.first_name); Naissance: \(formateDateToString(date: self.userdata.birth_date) ?? "xxxxx") a \(self.userdata.birth_place); Adresse: \(self.userdata.adress + ", " + self.userdata.zip_code + ", " + self.userdata.city ); Sortie: \(formateDateToString(date: Date())!) a \(formateDateToHourAndMin(date: Date())!); Motifs: \(raisons[selectedRaison])"
                     
@@ -78,6 +83,9 @@ struct qrcodegenerator: View {
             
             do {
                 try self.managedContext.save()
+                self.showingAlert = true
+                self.alert_text_top = "Succès de l'opération"
+                self.alert_message = "Vous avez générer une nouvelle attestation"
             }catch{
                 print(error)
             }
